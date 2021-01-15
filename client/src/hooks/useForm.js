@@ -1,14 +1,13 @@
 // write your custom hook here to control your checkout form
 import { useState } from 'react'
-import localStorage from './useLocalStorage'
 import e from 'cors';
 
 const useForm = (intialValue) =>{
     const [value, setValue] = useState(intialValue);
-    const handleChanges = evt =>{
+    const handleChanges = e =>{
         setValue({
             ...value, 
-            [evt.target.name]: evt.target.value
+            [e.target.name]: e.target.value
         })
     }
     return ([value, setValue, handleChanges])
