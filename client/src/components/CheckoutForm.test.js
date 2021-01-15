@@ -7,13 +7,14 @@ import userEvent from '@testing-library/user-event'
 
 test("form header renders", () => {
     render(<CheckoutForm/>)
-    let header = screen.getByRole("h2")
+    const header = screen.getByText("Checkout Form")
     expect(header).toBeInTheDocument();
 });
 
 test("form shows success message on submit with form details", () => {
-    const firstNameInput = screen.getByLabelText(/firstname/i);
-    const lastNameInput = screen.getByLabelText(/lastname/i);
+    render(<CheckoutForm/>)
+    const firstNameInput = screen.getByLabelText(/first name/i);
+    const lastNameInput = screen.getByLabelText(/last name/i);
     const addressInput = screen.getByLabelText(/address/i);
     const cityInput = screen.getByLabelText(/city/i);
     const stateInput = screen.getByLabelText(/state/i);
@@ -29,6 +30,10 @@ test("form shows success message on submit with form details", () => {
     const button = screen.getByRole("button")
     userEvent.click(button)
 
-    const successMessage = screen.findAllByText("test")
-    expect(successMessage).toBeInTheDocument()
+    const successMessage = screen.getByTestId("successMessage")
+    expect(successMessage).toBeInTheDocument();
+
+    const successText = screen.getByText("test")
+    expect(successText).toBeInTheDocument();
+    
 });
